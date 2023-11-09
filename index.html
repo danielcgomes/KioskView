@@ -8,15 +8,35 @@
     Rumble("play", {"video":"v3ptsmm","div":"rumble_v3ptsmm"});    
   </script>
   <script>
-    let el = document.querySelector('video');
-    el.addEventListener("canplay", myFunction);
+    function waitForElm(selector) {
+          return new Promise(resolve => {
+              if (document.querySelector(selector)) {
+                  return resolve(document.querySelector(selector));
+              }
+      
+              const observer = new MutationObserver(mutations => {
+                  if (document.querySelector(selector)) {
+                      observer.disconnect();
+                      resolve(document.querySelector(selector));
+                  }
+              });
+      
+              observer.observe(document.body, {
+                  childList: true,
+                  subtree: true
+              });
+          });
+      }
+
+    const elm = await waitForElm('video');
+    elm.addEventListener("canplay", myFunction);
+    elm.querySelector('video').addEventListener('ended',function(){
+          console.log('Video has ended!');
+        }, false);
 
     function myFunction() {
       alert ("Hello World!");
-      el.querySelector('video').click();
-      el.querySelector('video').addEventListener('ended',function(){
-          console.log('Video has ended!');
-        }, false);
+      elm.querySelector('video').click();      
     } 
     
   </script>
