@@ -8,9 +8,16 @@
     Rumble("play", {"video":"v3ptsmm","div":"rumble_v3ptsmm"});    
   </script>
   <script>
-    document.querySelector('video').click()
-    document.querySelector('video').addEventListener('ended',function(){
-      console.log('Video has ended!');
-    }, false);
+    let el = document.querySelector('video');
+    el.addEventListener("click", myFunction);
+
+    function myFunction() {
+      alert ("Hello World!");
+      el.querySelector('video').click();
+      el.querySelector('video').addEventListener('ended',function(){
+          console.log('Video has ended!');
+        }, false);
+    } 
+    
   </script>
 </body>
