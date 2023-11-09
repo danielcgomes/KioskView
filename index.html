@@ -5,10 +5,12 @@
 <body>
   <div id="rumble_v3ptsmm"></div>
   <script>
-    Rumble("play", {"video":"v3ptsmm","div":"rumble_v3ptsmm"});
-    $('video').click();
-    $('video').on('ended',function(){
+    Rumble("play", {"video":"v3ptsmm","div":"rumble_v3ptsmm"});    
+  </script>
+  <script>
+    document.querySelector('video').click()
+    document.querySelector('video').addEventListener('ended',function(){
       console.log('Video has ended!');
-    });
+    }, false);
   </script>
 </body>
